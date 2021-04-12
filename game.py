@@ -10,11 +10,28 @@ clock = pygame.time.Clock()
 pygame.init()
 pygame.display.set_caption('Snake by ptrcktylr')
 
+# render text
+font = pygame.font.SysFont("bahnschrift", 35)
+
+def write(font, writing, color, x, y):
+    text = font.render(writing,  True, color)
+    WIN.blit(text, (x, y))
+
+# print score
+def update_score():
+    write(font, f"score: {score}", WHITE, 0, 0)
+
+def update_gameover():
+    WIN.fill(BLACK)
+    write(font, "Game Over, You Lose!", RED, WIDTH // 2, WIDTH // 2)
+
+
 # colors
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+WHITE = (255, 255, 255)
 
 
 # snake class
@@ -41,9 +58,6 @@ class Snake:
     
     def move(self):
         self.keys = pygame.key.get_pressed()
-
-        # if any((self.keys[pygame.K_UP], self.keys[pygame.K_DOWN], self.keys[pygame.K_RIGHT], self.keys[pygame.K_LEFT])):
-        #     self.direction = self.keys[pygame.K_UP]*1 + self.keys[pygame.K_DOWN]*2 + self.keys[pygame.K_LEFT]*4 + self.keys[pygame.K_RIGHT]*8
 
         if self.keys[pygame.K_UP] and not self.down:
             self.up = True
@@ -75,9 +89,11 @@ class Snake:
 
         # make x and y the head of the snake
         x, y = self.body[0]
+
         # remove the last body part
         self.body.pop()
 
+        # move position
         if self.up == True:
             y = (y - self.velocity)
         elif self.down == True:
@@ -86,7 +102,8 @@ class Snake:
             x = (x - self.velocity)
         elif self.right == True:
             x = (x + self.velocity)
-
+        
+        # insert new body part at head
         self.body.insert(0, (x, y))
 
     def draw(self):
@@ -134,6 +151,10 @@ food = Food(WIN)
 food.new_random_position(snake)
 score = 0
 
+# def display_score(score):
+#     message = font.render(f'score: {score}', True, WHITE)
+#     WIN.blit(message, [0, 0])
+
 gameover = False
 
 while not gameover:
@@ -163,6 +184,7 @@ while not gameover:
 
     food.draw()
     snake.draw()
+    update_score()
 
     pygame.display.update()
 
