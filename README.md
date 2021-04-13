@@ -2,7 +2,7 @@
 
 Classic game of Snake
 
-[!preview](/images/preview.png)
+![preview](/images/preview.png)
 
 ## Local Setup
 
