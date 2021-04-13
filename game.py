@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 # screen size, clock, & window
 WIDTH = 700
@@ -187,5 +188,10 @@ while not gameover:
     update_score()
 
     pygame.display.update()
+
+WIN.fill(BLACK)
+write(font, "Game Over!", RED, WIDTH//2.5, WIDTH//2)
+pygame.display.update()
+time.sleep(3)
 
 pygame.quit()
