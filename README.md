@@ -2,10 +2,13 @@
 
 Classic game of Snake
 
+[!preview](/images/preview.png)
+
 ## Local Setup
 
 1. Install all dependencies
 `pip3 install -r requirements.txt`
+
 2. Run the game
 `python3 game.py`
 
